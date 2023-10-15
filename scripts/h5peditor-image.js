@@ -199,7 +199,10 @@ ns.widgets.image.prototype.addFile = function () {
     }
     html += ' title="' + ns.t('core', 'addFile') + '">' +
       '<div class="h5peditor-field-file-upload-text">' + ns.t('core', 'add') + '</div>' +
-    '</a>'
+      '</a>\n' +
+      '<a href="#" class="paste" title="Paste Image">' +
+        '<div class="h5peditor-field-image-paste-text">Paste</div>' +
+      '</a>';
 
     this.$file
       .html(html)
@@ -209,6 +212,13 @@ ns.widgets.image.prototype.addFile = function () {
         that.openFileSelector();
         return false;
       });
+
+    // Paste button
+    this.$file.children('.paste').click(function () {
+      that.isOriginalImage = true;
+      (async () => await that.uploadClipboard())();
+      return false;
+    });
 
     // Remove edit image button
     this.$editImage.addClass('hidden');

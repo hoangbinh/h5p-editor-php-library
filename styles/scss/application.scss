@@ -1,9 +1,9 @@
-@import "compass/css3/border-radius";
-@import "compass/css3/box-shadow";
-@import "compass/css3/opacity";
-@import "compass/css3/text-shadow";
-@import "compass/css3/transition";
-@import "compass/css3/transform";
+@import "lib/compass/css3/border-radius";
+@import "lib/compass/css3/box-shadow";
+@import "lib/compass/css3/opacity";
+@import "lib/compass/css3/text-shadow";
+@import "lib/compass/css3/transition";
+@import "lib/compass/css3/transform";
 
 @import "variables";
 @import "mixins";
@@ -575,7 +575,7 @@ a {
     .thumbnail:focus {
       @include box-shadow(0 0 10px 0 #222);
     }
-    .add {
+    .add, .paste {
       display: inline-block;
       cursor: pointer;
       padding: 0.5em 1.5em 0.5em 3em;
@@ -593,7 +593,8 @@ a {
       &:focus {
         box-shadow: 0 0 16px 0 rgba(133,188,255,0.84);
       }
-
+    }
+    .add {
       .h5peditor-field-file-upload-text:before {
         font-family: $icon-font-family;
         content: "\e902";
@@ -604,6 +605,18 @@ a {
         left: 0.3em;
         top: 0.1em;
       }
+    }
+    .paste {
+      .h5peditor-field-image-paste-text:before {
+        font-family: $icon-font-family;
+        content: "\e910";
+        line-height: 1.3;
+        color: #39c943;
+        font-size: 1.7em;
+        position: absolute;
+        left: 4.4em;
+        top: 0.1em;
+      } 
     }
     .remove {
       display: block;
@@ -666,10 +679,10 @@ a {
     position: static;
     overflow: visible;
 
-    .thumbnail, .add {
+    .thumbnail, .add, .paste {
       float: left;
     }
-    .add {
+    .add, .paste {
       margin-top: 8px;
     }
     .thumbnail {

@@ -101,6 +101,27 @@ H5PEditor.FileUploader = (function ($, EventDispatcher) {
       input.click();
     };
 
+    self.uploadClipboard = async function () {
+      try {
+        const permission = await navigator.permissions.query({
+          name: 'clipboard-read',
+        });
+        if (permission.state === 'denied') {
+          throw new Error('Not allowed to read clipboard.');
+        }
+        const clipboardContents = await navigator.clipboard.read();
+        for (const item of clipboardContents) {
+          if (item.types.includes('image/png')) {
+            const data = await item.getType('image/png');
+            self.upload(data, 'image.png');
+            break;
+          }
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
     /**
      * Determine allowed file mimes. Used to make it easier to find and
      * select the correct file.
